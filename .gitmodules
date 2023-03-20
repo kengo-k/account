@@ -1,0 +1,9 @@
+[submodule "frontend"]
+	path = frontend
+	url = github:kengo-k/account-frontend
+[submodule "backend"]
+	path = backend
+	url = github:kengo-k/account-backend
+[submodule "common"]
+	path = common
+	url = github:kengo-k/account-common
