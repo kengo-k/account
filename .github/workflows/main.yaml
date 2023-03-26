@@ -1,0 +1,13 @@
+name: 'publish docker image'
+
+on:
+  push:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'build docker image and publish it'
+        uses: kengo-k/github-custom-actions/.github/actions/publish_docker_image@main
+        with:
+          token: ${{ secrets.GHCR_TOKEN }}
