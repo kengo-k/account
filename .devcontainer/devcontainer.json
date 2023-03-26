@@ -1,0 +1,6 @@
+{
+  "name": "account",
+  "dockerComposeFile": "../docker-compose.yaml",
+  "service": "work",
+  "workspaceFolder": "/workspace"
+}
