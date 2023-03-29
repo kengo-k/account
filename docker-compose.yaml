@@ -4,11 +4,13 @@ services:
   # 作業用コンテナ
   # 全てのソースはこのコンテナ内で編集を行う
   work:
-    image: ghcr.io/kengo-k/dev-base-nodejs:202303201044-3c6e0ee
+    image: ghcr.io/kengo-k/account-work:202303261407-ca27f20
     container_name: account_work
     tty: true
     volumes:
       - ./:/workspace
+      - ./common:/workspace/frontend/src/common
+      - ./common:/workspace/backend/src/common
       - $HOME/.ssh:/home/container-user/.ssh
     networks:
       - account_net
@@ -24,7 +26,7 @@ services:
     tty: true
     volumes:
       - ./frontend/:/workspace
-      - ./common/:/workspace/common
+      - ./common/:/workspace/src/common
     networks:
       - account_net
 
@@ -34,7 +36,7 @@ services:
     tty: true
     volumes:
       - ./backend/:/workspace
-      - ./common/:/workspace/common
+      - ./common/:/workspace/src/common
     ports:
       - 8080:8080
     networks:
