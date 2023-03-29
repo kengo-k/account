@@ -10,7 +10,7 @@ services:
     volumes:
       - ./:/workspace
       - ./common:/workspace/frontend/src/common
-      - ./common:/workspace/backend/src/common
+      - ./common:/workspace/backend/src/main/common
       - $HOME/.ssh:/home/container-user/.ssh
     networks:
       - account_net
@@ -32,11 +32,11 @@ services:
 
   backend:
     image: ghcr.io/kengo-k/dev-base-nodejs:202303201044-3c6e0ee
-    container_name: account_backend
+    container_name: account_backend3
     tty: true
     volumes:
       - ./backend/:/workspace
-      - ./common/:/workspace/src/common
+      - ./common/:/workspace/src/main/common
     ports:
       - 8080:8080
     networks:
