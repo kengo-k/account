@@ -4,7 +4,7 @@ services:
   # 作業用コンテナ
   # 全てのソースはこのコンテナ内で編集を行う
   work:
-    image: ghcr.io/kengo-k/account-work:202303261407-ca27f20
+    image: ghcr.io/kengo-k/account-work:202303302232-96bcd29
     container_name: account_work
     tty: true
     volumes:
