@@ -1,4 +1,4 @@
-FROM ghcr.io/kengo-k/dev-base-nodejs:202303201044-3c6e0ee
+FROM ghcr.io/kengo-k/dev-base-nodejs:202303302228-2e39df0
 
 LABEL org.opencontainers.image.description="Accountプロジェクト用の作業用イメージ"
 
