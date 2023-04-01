@@ -1,0 +1,14 @@
+Host github
+  HostName github.com
+  IdentityFile ~/.ssh/id_rsa
+  User git
+
+Host frontend
+  HostName frontend
+  IdentityFile ~/.ssh/id_rsa
+  User container-user
+
+Host backend
+  HostName backend
+  IdentityFile ~/.ssh/id_rsa
+  User container-user
