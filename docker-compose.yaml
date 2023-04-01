@@ -4,8 +4,9 @@ services:
   # 作業用コンテナ
   # 全てのソースはこのコンテナ内で編集を行う
   work:
-    image: ghcr.io/kengo-k/account-work:202304012341-a0b0acf
+    image: ghcr.io/kengo-k/account-work:202304020020-cd5b223
     container_name: account_work
+    hostname: work
     tty: true
     volumes:
       - ./:/workspace
@@ -20,8 +21,9 @@ services:
       - backend
 
   frontend:
-    image: ghcr.io/kengo-k/dev-base-nodejs:202304012334-aa29e8c
+    image: ghcr.io/kengo-k/dev-base-nodejs:202304020017-bdc026c
     container_name: account_frontend
+    hostname: frontend
     ports:
       - 80:80
     tty: true
@@ -33,8 +35,9 @@ services:
       - account_net
 
   backend:
-    image: ghcr.io/kengo-k/dev-base-nodejs:202304012334-aa29e8c
-    container_name: account_backend3
+    image: ghcr.io/kengo-k/dev-base-nodejs:202304020017-bdc026c
+    container_name: account_backend
+    hostname: backend
     tty: true
     volumes:
       - ./backend/:/workspace
