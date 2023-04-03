@@ -1,0 +1,15 @@
+common:
+  host: account_db
+  username: Your Postgres UserName
+  password: Your Postgres Password
+  adapter: postgresql
+  encoding: utf-8
+
+production:
+  database: production
+
+development:
+  database: development
+
+test:
+  database: test
