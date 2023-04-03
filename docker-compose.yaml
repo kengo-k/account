@@ -48,15 +48,15 @@ services:
     networks:
       - account_net
 
-  # db:
-  #   image: postgres:12.6
-  #   env_file:
-  #     - db.env
-  #   container_name: account_db
-  #   volumes:
-  #     - "$PWD/data:/var/lib/postgresql/data"
-  #   networks:
-  #     - account_net
+  db:
+    image: postgres:12.6
+    env_file:
+      - db.env
+    container_name: account_db
+    volumes:
+      - "$PWD/data:/var/lib/postgresql/data"
+    networks:
+      - account_net
 
 networks:
   account_net:
