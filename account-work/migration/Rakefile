@@ -2,7 +2,7 @@ require 'erb'
 require 'yaml'
 require 'active_record'
 
-$all = YAML::load(File.open('../config/database.yml'))
+$all = YAML::load(File.open('database.yml'))
 $common = $all['common']
 
 DEFAULT_ENV = 'development'
@@ -113,7 +113,7 @@ namespace :migrate do
   task :run do |t, args|
     config = get_config args['env']
     ActiveRecord::Base.establish_connection(config)
-    context = ActiveRecord::MigrationContext.new(File.expand_path('./migrate'))
+    context = ActiveRecord::MigrationContext.new(File.expand_path('./migrate'), ActiveRecord::SchemaMigration)
     context.migrate
     Rake::Task["schema:dump"].invoke(args['env'], ActiveRecord::Migrator.current_version)
   end
