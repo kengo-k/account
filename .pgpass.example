@@ -1,1 +1,3 @@
 db:5432:development:root:root
+db:5432:production:root:root
+db:5432:test:root:root
