@@ -17,6 +17,11 @@ account
 
 accountリポジトリはsubmoduleとして各リポジトリを参照する形になっている。
 
+※注意: `account-frontend`および`account-backend`は直接`account-common`を参照する構成にはなっていない。`account-frontend`および`account-backend`のサービスをコンテナとして起動する際に`account-common`の内容を上記2コンテナ内に配置することで参照できるようにする。
+
+- 開発時はボリュームマウントを使って配置する
+- 本番時はイメージ構築時にコピーによって配置する
+
 ## 共通部品ソースコードのチェックアウト
 
 本アプリケーションは API とフロントエンドの二つに分けて開発している(Git リポジトリ自体が別)ため、共通で使用される部品(モデルクラス等)を共有しています。共有部品は`account-common`リポジトリで管理されていて、API とフロントエンドのプロジェクトは git の submodule 機能を使って`account-common`リポジトリを参照します。
