@@ -1,4 +1,21 @@
-# 1.前準備
+# プロジェクトの構成
+
+機能単位で主要なリポジトリとしては3つ存在する。
+
+- account-frontend - フロントエンド: Reactアプリケーション
+- account-backend - バックエンド: REST APIサーバ
+- account-common -上記の2リポジトリで共通で使用する機能
+
+そして上記の3リポジトリを取りまとめる親リポジトリが存在する。つまり合計で4つのリポジトリが存在し次のような構成になっている。
+
+```
+account
+ |-account-frontend
+ |-account-backend
+ |-account-common
+```
+
+accountリポジトリはsubmoduleとして各リポジトリを参照する形になっている。
 
 ## 共通部品ソースコードのチェックアウト
 
