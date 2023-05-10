@@ -4,9 +4,9 @@
 
 - account-frontend - フロントエンド: Reactアプリケーション
 - account-backend - バックエンド: REST APIサーバ
-- account-common -上記の2リポジトリで共通で使用する機能
+- account-common -上記の2リポジトリで共通で使用する部品
 
-そして上記の3リポジトリを取りまとめる親リポジトリが存在する。つまり合計で4つのリポジトリが存在し次のような構成になっている。
+そして上記の3リポジトリを取りまとめる親リポジトリが存在する。つまり合計で4つのリポジトリが存在し下記に示す構成になっている。
 
 ```
 account
@@ -15,22 +15,27 @@ account
  |-account-common
 ```
 
-accountリポジトリはsubmoduleとして各リポジトリを参照する形になっている。
+親であるaccountリポジトリはsubmoduleとして子である各リポジトリを参照する。
 
-※注意: `account-frontend`および`account-backend`は直接`account-common`を参照する構成にはなっていない。`account-frontend`および`account-backend`のサービスをコンテナとして起動する際に`account-common`の内容を上記2コンテナ内に配置することで参照できるようにする。
+※注意: `account-frontend`および`account-backend`は直接`account-common`を参照する構成にはなっていない。`account-frontend`および`account-backend`のサービスをコンテナとして起動する際に`account-common`の内容を上記2コンテナ内に配置することで参照できるようにする。ただし開発時と本番運用時では下記に示すように参照の方法が異なる。
 
 - 開発時はボリュームマウントを使って配置する
 - 本番時はイメージ構築時にコピーによって配置する
 
-## 共通部品ソースコードのチェックアウト
+# ソースコードのチェックアウト
 
-本アプリケーションは API とフロントエンドの二つに分けて開発している(Git リポジトリ自体が別)ため、共通で使用される部品(モデルクラス等)を共有しています。共有部品は`account-common`リポジトリで管理されていて、API とフロントエンドのプロジェクトは git の submodule 機能を使って`account-common`リポジトリを参照します。
-
-`api/project/src/main/common`ディレクトリに移動し、下記のコマンドを実行します。
+まずは親リポジトリである`account`リポジトリをcloneし、続けて`account`リポジトリ内で子リポジトリをsubmoduleとして取得する。
 
 ```
+# 親リポジトリ内に移動する
+$ cd account
+
+# commonを取得
+$ cd common
 $ git submodule init
 $ git submodule update
+
+(frontendとbackendも上記のcommonと同様の作業を行う)
 ```
 
 # 2.コンテナの起動～ DB アクセス確認
