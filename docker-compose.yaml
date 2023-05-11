@@ -12,7 +12,6 @@ services:
       - ./:/workspace
       - ./common:/workspace/frontend/src/common
       - ./common:/workspace/backend/src/main/common
-      - ./database.yml:/workspace/account-work/migration/database.yml
       - $HOME/.ssh:/home/container-user/.ssh
       - $PWD/account-work/config:/home/container-user/.ssh/config
     networks:
@@ -44,6 +43,7 @@ services:
       - ./backend/:/workspace
       - ./common/:/workspace/src/main/common
       - ./database.yml:/workspace/src/main/core/database.yml
+      - ./database.yml:/workspace/migration/database.yml
       - $HOME/.ssh:/home/container-user/.ssh
     ports:
       - 8080:8080
