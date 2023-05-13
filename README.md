@@ -194,3 +194,11 @@ $ npm test
 ```
 接続先ホスト:ポート番号:DB名:ユーザ名:パスワード
 ```
+
+# prismaによるマイグレーション
+
+既存のDBからprismaのスキーマ定義を生成する
+
+```
+$ npx prisma introspect
+```
