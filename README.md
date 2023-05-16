@@ -22,7 +22,9 @@ account
 - 開発時はボリュームマウントを使って配置する
 - 本番時はイメージ構築時にコピーによって配置する
 
-# ソースコードのチェックアウト
+# ローカル環境での開発手順
+
+## ソースコードのチェックアウト
 
 まずは親リポジトリである`account`リポジトリをcloneし、続けて`account`リポジトリ内で子リポジトリをsubmoduleとして取得する。
 
@@ -38,11 +40,11 @@ $ git submodule update
 (frontendとbackendも上記のcommonと同様の作業を行う)
 ```
 
-# 2.コンテナの起動～ DB アクセス確認
+## 設定ファイルの作成
 
-## 2-1: db.env ファイルの作成
+### db.env ファイルの作成
 
-このファイル(※README.md)と同階層に db.env ファイルを作成し Postgresql の環境変数を設定します。db.env ファイルは docker コンテナに Postgresql をインストールする際に使用します。
+このファイル(※README.md)と同階層に db.env ファイルを作成し Postgresql の環境変数を設定します。db.env ファイルは docker コンテナに Postgresql をインストールする際にdocker-compose.ymlから参照されます。
 
 db.env ファイルの内容は以下のとおりです。
 
@@ -55,9 +57,9 @@ PGDATA=/var/lib/postgresql/data/pgdata
 - ※POSTGRES_USER と POSTGRES_PASSWORD に適当な値を設定してください。
 - ※db.env ファイルは git 管理されません
 
-## 2-2: database.yml ファイルの作成
+### database.yml ファイルの作成
 
-api/config ディレクトリ下に database.yml ファイルを作成し Postgresql への接続情報を記載します。データベースの Migration ツールおよび API アプリケーションから利用されます。
+このファイル(※README.md)と同階層に database.yml ファイルを作成し Postgresql への接続情報を記載します。データベースの Migration ツールおよび backendから参照されます。
 
 database.yml ファイルの内容は以下のとおりです。
 
@@ -82,37 +84,30 @@ test:
 
 雛形 database.template.yml ファイルがあるのでコピーして必要箇所を編集します
 
-- ※username と password に適当な値を設定してください。
+- ※username と password に適当な値を設定してください。(db.envと同じ値を設定します)
 - ※database.yml ファイルは git 管理されません
 
-## 2-3: Docker イメージの作成
+## コンテナの起動
 
-docker-compose.yml ファイルがある階層に移動し下記のコマンドを実行します。
+VSCodeから`Ctrl + Shift + P`を実行しコマンドパレットを開き、`Dev Containers: Open Folder in Container...`を選択しプロジェクトルート下にある.devcontainerディレクトリを開く。プロジェクトルート下にあるdocker-compose.ymlに記述されているコンテナが自動的に起動する。VSCodeは`account-work`コンテナ上で実行される。このコンテナは開発を行うための作業用コンテナとなる。このコンテナ内からfrontendコンテナやbackendコンテナにsshで接続できる。
 
-```
-$ docker-compose build --no-cache
-```
-
-## 2-4: Docker コンテナの起動
-
-docker-compose.yml ファイルがある階層に移動し下記のコマンドを実行します。
-
-```
-$ docker-compose up -d
+```sh
+$ ssh frontend # frontendにsshログインする
+$ ssh backend # backendにsshログインすうｒ
 ```
 
-## 2-5: DB 接続確認
+## DB 接続確認
 
-api コンテナにログインし db コンテナ にアクセスできるか確認します。まず下記コマンドで api コンテナにログインします。
+backend コンテナにログインし db コンテナ にアクセスできるか確認します。DevContainerを起動している状態で下記コマンドを実行しbackendコンテナにログインします。
 
 ```
-$ docker exec -it account_api bash
+$ ssh backend
 ```
 
 ログインできたら psql コマンドを使い db コンテナにログインします。
 
 ```
-$ psql -U"設定ファイルに記載したユーザ名" -h"account_db"
+$ psql -U"設定ファイルに記載したユーザ名" -h"account_db" -d "使用するDB名"
 ```
 
 パスワードの入力を求められるので設定ファイルに記載したパスワードを入力し、psql プロンプトが表示されれば OK です。
