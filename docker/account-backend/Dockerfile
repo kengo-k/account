@@ -1,6 +1,6 @@
 FROM ghcr.io/kengo-k/dev-base-nodejs:202305212306-de55a20
 
-LABEL org.opencontainers.image.description="Account-Backendの開発用イメージ"
+LABEL org.opencontainers.image.description="Account-Backend開発用イメージ"
 
 USER root
 
