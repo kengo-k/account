@@ -4,7 +4,7 @@ services:
   # 作業用コンテナ
   # 全てのソースはこのコンテナ内で編集を行う
   work:
-    image: ghcr.io/kengo-k/dev-base-nodejs:202304020017-bdc026c
+    image: ghcr.io/kengo-k/dev-base-ubuntu:202305212301-b852c45
     container_name: account_work
     hostname: work
     tty: true
@@ -13,7 +13,7 @@ services:
       - ./common:/workspace/frontend/src/common
       - ./common:/workspace/backend/src/main/common
       - $HOME/.ssh:/home/container-user/.ssh
-      - $PWD/account-work/config:/home/container-user/.ssh/config
+      - $PWD/docker/account-work/config:/home/container-user/.ssh/config
     networks:
       - account_net
     depends_on:
@@ -21,7 +21,7 @@ services:
       - backend
 
   frontend:
-    image: ghcr.io/kengo-k/dev-base-nodejs:202304020017-bdc026c
+    image: ghcr.io/kengo-k/dev-base-nodejs:202305212306-de55a20
     container_name: account_frontend
     hostname: frontend
     ports:
