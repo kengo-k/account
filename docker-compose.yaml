@@ -31,6 +31,8 @@ services:
       - ./frontend/:/workspace
       - ./common/:/workspace/src/common
       - $HOME/.ssh:/home/container-user/.ssh
+    depends_on:
+      - backend
     networks:
       - account_net
 
@@ -47,6 +49,8 @@ services:
       - $HOME/.ssh:/home/container-user/.ssh
     ports:
       - 8080:8080
+    depends_on:
+      - db
     networks:
       - account_net
 
