@@ -47,6 +47,8 @@ services:
       - ./database.yml:/workspace/src/main/core/database.yml
       - ./database.yml:/workspace/migration/database.yml
       - $HOME/.ssh:/home/container-user/.ssh
+    working_dir: /workspace
+    command: ["/workspace/init.sh"]
     ports:
       - 8080:8080
     depends_on:
