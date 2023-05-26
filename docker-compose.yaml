@@ -24,6 +24,8 @@ services:
     image: ghcr.io/kengo-k/dev-base-nodejs:202305222323-c664e22
     container_name: account_frontend
     hostname: frontend
+    working_dir: /workspace
+    command: ["/workspace/init.sh"]
     ports:
       - 80:80
     tty: true
